@@ -8,5 +8,13 @@ export default async function TablePage({
   const { table } = await params;
   const reqRes = await getData(table);
 
-  return <div>{reqRes}</div>;
+  return (
+    <div>
+      {reqRes.results.map((row, rowIndex) => (
+        <p>
+          {row.toString()} {rowIndex}
+        </p>
+      ))}
+    </div>
+  );
 }
