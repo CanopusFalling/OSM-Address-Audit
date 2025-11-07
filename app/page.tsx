@@ -1,5 +1,5 @@
 import getData from "./data/getData";
 
-export default async function Home() {
+export default function Home() {
   return <div>{getData()}</div>;
 }
