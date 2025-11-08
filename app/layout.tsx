@@ -14,7 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer>
+          Contains public sector information licensed under the Open Government
+          Licence v3.0
+        </footer>
+      </body>
     </html>
   );
 }
