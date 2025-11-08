@@ -40,7 +40,8 @@
 		{
 			"binding": "DB",
 			"database_name": "osm-address-audit",
-			"database_id": "020a3724-b59b-4044-8c46-cc8b8cc5eb25"
+			"database_id": "020a3724-b59b-4044-8c46-cc8b8cc5eb25",
+			"remote": true
 		}
   	]
 	/**
