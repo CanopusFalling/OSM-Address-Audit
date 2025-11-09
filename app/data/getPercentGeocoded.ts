@@ -2,9 +2,12 @@ import "server-only";
 
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-function calculatePercentage(records: any[], targetSource: string): number {
+function calculatePercentage(
+  records: Record<string, number | string>[],
+  targetSource: string
+): number {
   const totalCount = records.reduce((sum, record) => {
-    return sum + record["COUNT(*)"];
+    return sum + (record["COUNT(*)"] as number);
   }, 0);
 
   if (totalCount === 0) {
@@ -16,7 +19,7 @@ function calculatePercentage(records: any[], targetSource: string): number {
   );
   const targetCount = targetRecord ? targetRecord["COUNT(*)"] : 0;
 
-  const percentage = (targetCount / totalCount) * 100;
+  const percentage = ((targetCount as number) / totalCount) * 100;
 
   return percentage;
 }
@@ -37,6 +40,8 @@ export default async function getPercentGeocoded(import_id: number) {
 
   const queryResult = await stmt.run();
 
-  console.log(queryResult.results);
-  return calculatePercentage(queryResult.results, "OpenStreetMap");
+  return calculatePercentage(
+    queryResult.results as Record<string, number | string>[],
+    "OpenStreetMap"
+  );
 }
