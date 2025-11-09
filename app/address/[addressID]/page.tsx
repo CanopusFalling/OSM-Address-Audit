@@ -1,4 +1,5 @@
-import getAddress from "@/app/data/getAddress";
+import { getAddress } from "@/app/data/address";
+import { MapContainer } from "./MapContainer";
 
 export default async function AddressPage({
   params,
@@ -10,11 +11,21 @@ export default async function AddressPage({
 
   return (
     <div>
-      <h1>{addressInfo["raw_address"] as string}</h1>
+      <h1 className="text-2xl">{addressInfo.raw_address}</h1>
 
-      <h2>Raw Data:</h2>
+      <hr />
 
-      <p>{JSON.stringify(addressInfo)}</p>
+      {addressInfo.geocode_success ? (
+        <p className="text-green-500">Address Detected in OSM!</p>
+      ) : (
+        <p className="text-red-500">Address Missing From OSM</p>
+      )}
+
+      <MapContainer
+        x={addressInfo.x}
+        y={addressInfo.y}
+        text={addressInfo.raw_address}
+      />
     </div>
   );
 }
