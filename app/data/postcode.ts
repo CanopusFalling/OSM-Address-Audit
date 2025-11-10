@@ -1,7 +1,6 @@
 import "server-only";
 
 import getDB from "@/app/lib/db";
-import { Address } from "./address";
 
 export interface Postcode {
   id: number;
@@ -10,7 +9,7 @@ export interface Postcode {
   import_id: number;
 }
 
-function parseRecord(record: Record<string, any>): Postcode {
+function parseRecord(record: Record<string, string | number>): Postcode {
   return {
     id: record["id"] as number,
     postcode: record["postcode"] as string,
@@ -28,7 +27,7 @@ export async function getPostcode(id: number): Promise<Postcode> {
     throw new Error("Postcode Not Found");
   }
 
-  return parseRecord(result);
+  return parseRecord(result as Record<string, string | number>);
 }
 
 export async function getPostcodesInImport(import_id: number) {
@@ -44,7 +43,9 @@ export async function getPostcodesInImport(import_id: number) {
     throw new Error("Postcodes associated with import not found.");
   }
 
-  const postcodes = result.results.map((record) => parseRecord(record));
+  const postcodes = result.results.map((record) =>
+    parseRecord(record as Record<string, string | number>)
+  );
 
   return postcodes;
 }

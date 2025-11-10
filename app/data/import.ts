@@ -12,7 +12,7 @@ export interface Import {
   data_license_url: string;
 }
 
-function parseRecord(record: Record<string, any>): Import {
+function parseRecord(record: Record<string, number | string>): Import {
   return {
     id: record["id"] as number,
     authority: record["authority"] as string,
@@ -35,7 +35,7 @@ export async function getImport(id: number): Promise<Import> {
     throw new Error("Import Not Found");
   }
 
-  return parseRecord(result);
+  return parseRecord(result as Record<string, string | number>);
 }
 
 export async function getImports(): Promise<Import[]> {
@@ -47,6 +47,8 @@ export async function getImports(): Promise<Import[]> {
     throw new Error("No Imports in DB");
   }
 
-  const imports: Import[] = result.results.map((record) => parseRecord(record));
+  const imports: Import[] = result.results.map((record) =>
+    parseRecord(record as Record<string, string | number>)
+  );
   return imports;
 }
