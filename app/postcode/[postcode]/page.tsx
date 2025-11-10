@@ -1,3 +1,5 @@
+import { MarkerMapDynamic } from "@/app/components/MarkerMapDynamic";
+import { MarkerData } from "@/app/components/MarkerMap";
 import getPostcode from "@/app/data/getPostcode";
 
 export default async function PostcodePage({
@@ -8,11 +10,19 @@ export default async function PostcodePage({
   const { postcode } = await params;
   const addressInfo = await getPostcode(postcode);
 
+  const markers: MarkerData[] = addressInfo.map((address) => ({
+    y: address.y as number,
+    x: address.x as number,
+    text: address.raw_address as string,
+  }));
+
   return (
     <div>
       <h1 className="text-xl">Addresses in {postcode}</h1>
 
       <hr />
+
+      <MarkerMapDynamic markers={markers} />
 
       {addressInfo.length === 0 ? (
         <p className="bg-red-800 p-4 rounded-lg">

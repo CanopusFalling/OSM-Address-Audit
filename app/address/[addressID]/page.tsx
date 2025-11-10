@@ -29,6 +29,8 @@ export default async function AddressPage({
       )}
 
       <MarkerMapDynamic markers={[marker]} />
+
+      <p>Raw Data: {JSON.stringify(addressInfo)}</p>
     </div>
   );
 }
