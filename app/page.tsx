@@ -3,9 +3,7 @@ import Link from "next/link";
 
 export default async function Home() {
   const importsQuery = await getImports();
-  console.log(importsQuery.success);
   const imports = importsQuery.results;
-  console.log(imports);
 
   return (
     <>
