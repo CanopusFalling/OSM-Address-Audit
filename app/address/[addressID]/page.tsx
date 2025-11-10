@@ -1,5 +1,6 @@
 import { getAddress } from "@/app/data/address";
-import { MapContainer } from "./MapContainer";
+import { MarkerMapDynamic } from "@/app/components/MarkerMapDynamic";
+import { MarkerData } from "@/app/components/MarkerMap";
 
 export default async function AddressPage({
   params,
@@ -8,6 +9,12 @@ export default async function AddressPage({
 }) {
   const { addressID } = await params;
   const addressInfo = await getAddress(Number(addressID));
+
+  const marker: MarkerData = {
+    x: addressInfo.x,
+    y: addressInfo.y,
+    text: addressInfo.raw_address,
+  };
 
   return (
     <div>
@@ -21,11 +28,7 @@ export default async function AddressPage({
         <p className="text-red-500">Address Missing From OSM</p>
       )}
 
-      <MapContainer
-        x={addressInfo.x}
-        y={addressInfo.y}
-        text={addressInfo.raw_address}
-      />
+      <MarkerMapDynamic markers={[marker]} />
     </div>
   );
 }
