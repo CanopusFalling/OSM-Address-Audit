@@ -1,3 +1,5 @@
+import "server-only";
+
 import getDB from "@/app/lib/db";
 
 export interface Address {

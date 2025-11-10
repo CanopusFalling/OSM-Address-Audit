@@ -1,9 +1,8 @@
-import getImports from "@/app/data/getImports";
+import { getImports } from "@/app/data/import";
 import Link from "next/link";
 
 export default async function Home() {
-  const importsQuery = await getImports();
-  const imports = importsQuery.results;
+  const imports = await getImports();
 
   return (
     <>
@@ -19,26 +18,26 @@ export default async function Home() {
         </thead>
         <tbody>
           {imports.map((record) => (
-            <tr key={Number(record.id as string)}>
+            <tr key={Number(record.id)}>
               <td className="border border-white p-2">
                 <Link
-                  href={`/import/${record.id as string}`}
+                  href={`/import/${record.id}`}
                   className="text-blue-500 underline"
                 >
-                  {record.authority as string}
+                  {record.authority}
                 </Link>
               </td>
               <td className="border border-white p-2">
                 <Link
-                  href={record.data_license_url as string}
+                  href={record.data_license_url}
                   className="text-blue-500 underline"
                 >
-                  {record.data_license as string}
+                  {record.data_license}
                 </Link>
               </td>
               <td className="border border-white p-2">
                 <Link
-                  href={record.source_url as string}
+                  href={record.source_url}
                   className="text-blue-500 underline"
                 >
                   Source
