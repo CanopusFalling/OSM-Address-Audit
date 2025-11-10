@@ -7,7 +7,7 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-//@ts-expect-error
+//@ts-expect-error required to delete leaflet icon url
 delete L.Icon.Default.prototype._getIconUrl; // Remove the old URL
 
 L.Icon.Default.mergeOptions({
