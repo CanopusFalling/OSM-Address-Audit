@@ -12,10 +12,18 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 // //@ts-expect-error required to delete leaflet icon url
 // delete L.Icon.Default.prototype._getIconUrl; // Remove the old URL
 
+// Required as the nextjs deployment behaves slightly differently on cloudflare workers vs dev.
+const getIconUrl = (asset: any) => {
+  if (typeof asset === "object" && asset.src) {
+    return asset.src;
+  }
+  return asset;
+};
+
 L.Icon.Default.mergeOptions({
-  iconUrl: markerIcon,
-  iconRetinaUrl: markerIcon2x,
-  shadowUrl: markerShadow,
+  iconUrl: getIconUrl(markerIcon),
+  iconRetinaUrl: getIconUrl(markerIcon2x),
+  shadowUrl: getIconUrl(markerShadow),
 });
 
 export interface MarkerData {
