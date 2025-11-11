@@ -34,7 +34,7 @@ export async function getPostcodesInImport(import_id: number) {
   const db = await getDB();
   const stmt = db
     .prepare(
-      "SELECT * from postcodes WHERE import_id = ? AND geocoding_rate != 0 ORDER BY geocoding_rate LIMIT 100;"
+      "SELECT * from postcodes WHERE import_id = ? AND geocoding_rate IS NOT 0 AND geocoding_rate IS NOT 1 ORDER BY geocoding_rate DESC LIMIT 100;"
     )
     .bind(import_id);
   const result = await stmt.run();

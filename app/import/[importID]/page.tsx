@@ -40,6 +40,8 @@ export default async function ImportPage({
 
       <hr />
 
+      <p>These addresses are nearly complete!</p>
+
       <div className="flex flex-col">
         {postcodes.map((postcode) => (
           <Link
