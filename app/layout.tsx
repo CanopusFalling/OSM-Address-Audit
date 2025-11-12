@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     "Auditing addresses in the OSM database using data published by local authorities.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{
