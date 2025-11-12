@@ -1,6 +1,8 @@
 import { getAddress } from "@/app/data/address";
 import { MarkerMapDynamic } from "@/app/components/MarkerMapDynamic";
 import { MarkerData } from "@/app/components/MarkerMap";
+import { get } from "http";
+import geocode from "@/app/data/geocode_proton";
 
 export default async function AddressPage({
   params,
@@ -15,6 +17,10 @@ export default async function AddressPage({
     y: addressInfo.y,
     text: addressInfo.raw_address,
   };
+
+  const geocodeRes = await geocode(addressInfo.raw_address);
+
+  const geocodeBody = await geocodeRes.json();
 
   return (
     <div>
@@ -31,6 +37,8 @@ export default async function AddressPage({
       <MarkerMapDynamic markers={[marker]} />
 
       <p>Raw Data: {JSON.stringify(addressInfo)}</p>
+
+      <p>Geocode Res {JSON.stringify(geocodeBody as object)}</p>
     </div>
   );
 }

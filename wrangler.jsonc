@@ -43,7 +43,7 @@
 			"database_id": "020a3724-b59b-4044-8c46-cc8b8cc5eb25",
 			"remote": true
 		}
-  	]
+  	],
 	/**
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
@@ -63,4 +63,11 @@
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
 	 */
 	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
+	"vpc_services": [
+		{
+			"binding": "VPC_SERVICE",
+			"service_id": "019a77f9-29ea-7e11-9ac4-19261e30ba52",
+			"remote": true
+		}
+	]
 }
