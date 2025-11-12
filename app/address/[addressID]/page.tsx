@@ -4,6 +4,8 @@ import { MarkerData } from "@/app/components/MarkerMap";
 import { get } from "http";
 import geocode from "@/app/data/geocode_proton";
 
+export const dynamic = "force-dynamic";
+
 export default async function AddressPage({
   params,
 }: {

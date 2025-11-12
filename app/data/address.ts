@@ -2,8 +2,6 @@ import "server-only";
 
 import getDB from "@/app/lib/db";
 
-export const dynamic = "force-dynamic";
-
 export interface Address {
   id: number;
   internal_ref_id: string; // Whatever the internal ID is used by the data provider.
